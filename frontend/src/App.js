@@ -11,6 +11,7 @@ import Motd from './components/pages/private/motd/motd'
 
 const ip = 'http://localhost:8001/'
 let isAuthenticated = false
+axios.defaults.withCredentials = true
 
 function App () {
   let history = useHistory()
