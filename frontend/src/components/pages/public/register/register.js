@@ -9,15 +9,36 @@ function Register ({ register }) {
 
   return (
     <div>
-      <input type='text' id='email' name='email' placeholder='Email...' />
-      <br />
-      <input
-        type='text'
-        id='password'
-        name='password'
-        placeholder='Password...'
-      />
-      <button onClick={handleRegister}>Register</button>
+      <center>
+        <h1>Register</h1>
+        <div>
+          <input
+            type='text'
+            id='email'
+            name='email'
+            onKeyPress={event => {
+              if (event.key === 'Enter') {
+                handleRegister()
+              }
+            }}
+            placeholder='Email...'
+          />
+          <br />
+          <input
+            type='text'
+            id='password'
+            name='password'
+            onKeyPress={event => {
+              if (event.key === 'Enter') {
+                handleRegister()
+              }
+            }}
+            placeholder='Password...'
+          />
+          <br />
+          <button onClick={handleRegister}>Register</button>
+        </div>
+      </center>
     </div>
   )
 }

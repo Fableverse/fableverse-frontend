@@ -8,8 +8,11 @@ import Landing from './components/pages/public/landing/landing'
 import Login from './components/pages/public/login/login'
 import Register from './components/pages/public/register/register'
 import Motd from './components/pages/private/motd/motd'
+import ServerCreate from './components/pages/private/server-create/server-create'
+import ServerList from './components/pages/private/server-list/server-list'
 
 const ip = 'http://localhost:8001/'
+let validated = false
 let isAuthenticated = false
 axios.defaults.withCredentials = true
 
@@ -18,17 +21,35 @@ function App () {
   const startingLocation = history.location
 
   useEffect(() => {
-    axios
-      .post(ip + 'user/validate')
-      .then(res => {
-        if (res.status === 200) {
-          isAuthenticated = true
-          history.push(startingLocation)
+    function getCookie (cname) {
+      var name = cname + '='
+      var decodedCookie = decodeURIComponent(document.cookie)
+      var ca = decodedCookie.split(';')
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i]
+        while (c.charAt(0) === ' ') {
+          c = c.substring(1)
         }
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
+        if (c.indexOf(name) === 0) {
+          return c.substring(name.length, c.length)
+        }
+      }
+      return ''
+    }
+    if (getCookie('token') !== '' && !validated) {
+      validated = true
+      axios
+        .post(ip + 'user/validate')
+        .then(res => {
+          if (res.status === 200) {
+            isAuthenticated = true
+            history.push(startingLocation)
+          }
+        })
+        .catch(function (error) {
+          console.log('Token has expired.')
+        })
+    }
   }, [history, startingLocation])
 
   function login (email, password) {
@@ -50,8 +71,10 @@ function App () {
 
   function signout () {
     document.cookie = 'token=; Max-Age=-99999999;'
-    isAuthenticated = false
-    history.push('/')
+    setTimeout(() => {
+      isAuthenticated = false
+      history.push('/login')
+    }, 100)
   }
 
   function register (email, password) {
@@ -102,11 +125,19 @@ function App () {
           )}
 
           {isAuthenticated ? (
-            <li>
-              <Link to='/login' onClick={signout}>
-                Signout
-              </Link>
-            </li>
+            <div>
+              <li>
+                <Link to='/servers/create'>Create Server</Link>
+              </li>
+              <li>
+                <Link to='/servers/'>Server List</Link>
+              </li>
+              <li>
+                <Link to='/login' onClick={signout}>
+                  Signout
+                </Link>
+              </li>
+            </div>
           ) : (
             ''
           )}
@@ -122,6 +153,8 @@ function App () {
         </Route>
 
         <PrivateRoute path='/motd' component={Motd} />
+        <PrivateRoute path='/servers/create' component={ServerCreate} />
+        <PrivateRoute path='/servers/' component={ServerList} />
 
         {isAuthenticated ? (
           <Route path='/'>

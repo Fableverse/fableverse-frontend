@@ -9,15 +9,36 @@ function Login ({ login }) {
 
   return (
     <div>
-      <input type='text' id='email' name='email' placeholder='Email...' />
-      <br />
-      <input
-        type='password'
-        id='password'
-        name='password'
-        placeholder='Password...'
-      />
-      <button onClick={handleLogin}>Login</button>
+      <center>
+        <h1>Login</h1>
+        <div>
+          <input
+            type='text'
+            id='email'
+            name='email'
+            onKeyPress={event => {
+              if (event.key === 'Enter') {
+                handleLogin()
+              }
+            }}
+            placeholder='Email...'
+          />
+          <br />
+          <input
+            type='password'
+            id='password'
+            name='password'
+            onKeyPress={event => {
+              if (event.key === 'Enter') {
+                handleLogin()
+              }
+            }}
+            placeholder='Password...'
+          />
+          <br />
+          <button onClick={handleLogin}>Login</button>
+        </div>
+      </center>
     </div>
   )
 }
