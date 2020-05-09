@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css'
 
 import { Switch, Route, Link, useHistory } from 'react-router-dom'
@@ -10,6 +10,7 @@ import Register from './components/pages/public/register/register'
 import Motd from './components/pages/private/motd/motd'
 import ServerCreate from './components/pages/private/server-create/server-create'
 import ServerList from './components/pages/private/server-list/server-list'
+import ServerPlay from './components/pages/private/server-play/server-play'
 
 const ip = 'http://localhost:8001/'
 let validated = false
@@ -17,6 +18,8 @@ let isAuthenticated = false
 axios.defaults.withCredentials = true
 
 function App () {
+  const [inGame, setInGame] = useState(false)
+
   let history = useHistory()
   const startingLocation = history.location
 
@@ -106,43 +109,47 @@ function App () {
 
   return (
     <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to='/'>Home</Link>
-          </li>
-          {isAuthenticated ? (
-            ''
-          ) : (
-            <div>
-              <li>
-                <Link to='/login'>Login</Link>
-              </li>
-              <li>
-                <Link to='/register'>Register</Link>
-              </li>
-            </div>
-          )}
+      {inGame ? (
+        ''
+      ) : (
+        <nav>
+          <ul>
+            <li>
+              <Link to='/'>Home</Link>
+            </li>
+            {isAuthenticated ? (
+              ''
+            ) : (
+              <div>
+                <li>
+                  <Link to='/login'>Login</Link>
+                </li>
+                <li>
+                  <Link to='/register'>Register</Link>
+                </li>
+              </div>
+            )}
 
-          {isAuthenticated ? (
-            <div>
-              <li>
-                <Link to='/servers/create'>Create Server</Link>
-              </li>
-              <li>
-                <Link to='/servers/'>Server List</Link>
-              </li>
-              <li>
-                <Link to='/login' onClick={signout}>
-                  Signout
-                </Link>
-              </li>
-            </div>
-          ) : (
-            ''
-          )}
-        </ul>
-      </nav>
+            {isAuthenticated ? (
+              <div>
+                <li>
+                  <Link to='/servers/create'>Create Server</Link>
+                </li>
+                <li>
+                  <Link to='/servers/'>Server List</Link>
+                </li>
+                <li>
+                  <Link to='/login' onClick={signout}>
+                    Signout
+                  </Link>
+                </li>
+              </div>
+            ) : (
+              ''
+            )}
+          </ul>
+        </nav>
+      )}
 
       <Switch>
         <Route path='/login'>
@@ -154,6 +161,17 @@ function App () {
 
         <PrivateRoute path='/motd' component={Motd} />
         <PrivateRoute path='/servers/create' component={ServerCreate} />
+
+        <Route
+          path='/servers/:id'
+          render={props =>
+            isAuthenticated === true ? (
+              <ServerPlay setInGame={setInGame} />
+            ) : (
+              history.push('/login')
+            )
+          }
+        />
         <PrivateRoute path='/servers/' component={ServerList} />
 
         {isAuthenticated ? (

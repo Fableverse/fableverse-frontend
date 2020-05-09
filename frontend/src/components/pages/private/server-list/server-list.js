@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 const ip = 'http://localhost:8001/'
@@ -11,7 +12,7 @@ function ServerCreate () {
       axios.get(ip + 'server/').then(data => {
         console.log('Updated!')
         setServers(data.data)
-        setTimeout(refresh, 5000)
+        // setTimeout(refresh, 5000)
       })
     }
     refresh()
@@ -43,7 +44,9 @@ function ServerCreate () {
                 <td>{description}</td>
                 <td>{status}</td>
                 <td>
-                  <button>Join</button>
+                  <Link to={'/servers/' + id}>
+                    <button>Join</button>
+                  </Link>
                 </td>
               </tr>
             )
