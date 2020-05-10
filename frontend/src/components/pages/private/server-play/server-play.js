@@ -152,7 +152,21 @@ function ServerPlay ({ setInGame }) {
               Exit Game
             </a>
           </div>
-          <div className='center-column'></div>
+          <div className='center-column'>
+            <center>
+              <input
+                className='textarea input'
+                type='text'
+                placeholder='Enter your message...'
+                style={{
+                  width: '90%',
+                  padding: '10px',
+                  margin: '10px',
+                  borderRadius: '6px'
+                }}
+              />
+            </center>
+          </div>
           <div className='right-column'></div>
         </div>
       )}
