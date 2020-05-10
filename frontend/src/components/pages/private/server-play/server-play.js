@@ -64,10 +64,7 @@ function ServerPlay ({ setInGame }) {
     <div>
       <div className='row'>
         <div className='left-column'>
-          <div
-            className='header'
-            style={{ padding: '5px 15px', width: '100%' }}
-          >
+          <div className='header' style={{ width: '100%', paddingTop: '15px' }}>
             <img
               src={Logo}
               style={{
@@ -100,11 +97,32 @@ function ServerPlay ({ setInGame }) {
               </h2>
             </div>
           </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <div
+            style={{
+              width: '330px',
+              height: '300px',
+              backgroundColor: '#191A1C'
+            }}
+          ></div>
+          <a
+            href='/servers/'
+            style={{
+              width: '100%',
+              margin: '100px auto',
+              display: 'block',
+              textAlign: 'center'
+            }}
+          >
+            Exit Game
+          </a>
         </div>
         <div className='center-column'></div>
         <div className='right-column'></div>
       </div>
-      {/* <a href='/servers/'>Exit Game</a> */}
     </div>
   )
 }
