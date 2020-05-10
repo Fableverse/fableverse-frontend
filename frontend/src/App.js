@@ -19,6 +19,7 @@ axios.defaults.withCredentials = true
 
 function App () {
   const [inGame, setInGame] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   let history = useHistory()
   const startingLocation = history.location
@@ -47,11 +48,15 @@ function App () {
           if (res.status === 200) {
             isAuthenticated = true
             history.push(startingLocation)
+          } else {
+            setIsLoading(false)
           }
         })
         .catch(function (error) {
           console.log('Token has expired.')
         })
+    } else {
+      setIsLoading(false)
     }
   }, [history, startingLocation])
 
@@ -109,7 +114,7 @@ function App () {
 
   return (
     <div>
-      {inGame ? (
+      {inGame || isLoading ? (
         ''
       ) : (
         <nav>
@@ -153,7 +158,7 @@ function App () {
 
       <Switch>
         <Route path='/login'>
-          <Login login={login} />
+          <Login login={login} isLoading={isLoading} />
         </Route>
         <Route path='/register'>
           <Register register={register} />
