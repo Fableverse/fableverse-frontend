@@ -1,3 +1,32 @@
 body {
-  min-width: 1400px;
+  background-color: #191a1c;
+  color: white;
+}
+
+.left-column {
+  display: block;
+  float: left;
+  width: 300px;
+  height: 100vh;
+  background-color: #070707;
+}
+.center-column {
+  display: block;
+  float: left;
+
+  height: 100vh;
+}
+.right-column {
+  display: block;
+  float: right;
+  width: 250px;
+  height: 100vh;
+  background-color: #070707;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: '';
+  display: table;
+  clear: both;
 }

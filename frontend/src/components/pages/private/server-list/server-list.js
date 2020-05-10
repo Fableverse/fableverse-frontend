@@ -21,7 +21,14 @@ function ServerCreate () {
   return (
     <div>
       <center>
-        <h1>Server List</h1>
+        <h1 style={{ margin: 0, padding: 0 }}>Server List</h1>
+        <button
+          onClick={() => {
+            window.location.reload()
+          }}
+        >
+          Refresh
+        </button>
       </center>
       <table style={{ width: '100%' }}>
         <tbody>
