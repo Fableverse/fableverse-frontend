@@ -1,6 +1,7 @@
 body {
   background-color: #191a1c;
-  color: white;
+  color: #ddd;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .left-column {
@@ -8,9 +9,8 @@ body {
   left: 0;
   width: 330px;
   height: 100%;
-  background-color: pink;
   padding: 0 15px;
-  background-color: #070707;
+  background-color: rgb(18, 19, 21);
 }
 .center-column {
   position: absolute;
@@ -27,7 +27,7 @@ body {
   top: 0;
   width: 330px;
   height: 100%;
-  background-color: #070707;
+  background-color: rgb(18, 19, 21);
   z-index: -1;
 }
 
@@ -47,14 +47,15 @@ a {
   box-sizing: border-box;
   left: 0;
   right: 0;
-  width: 100%;
-  height: 5vh;
+  width: 95%;
+  height: 40px;
   padding: 10px;
   /* margin: '20px auto', */
   /* borderRadius: '6px', */
   /* position: 'absolute', */
   /* bottom: '0', */
 
-  background-color: #070707;
+  background-color: rgb(18, 19, 21);
+  border: 1px solid #424242;
   color: white;
 }

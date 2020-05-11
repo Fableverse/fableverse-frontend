@@ -55,10 +55,26 @@ function ServerPlay ({ setInGame }) {
         seconds = '0' + seconds
       }
 
-      let time =
-        myDate.getHours() + ':' + myDate.getUTCMinutes() + ':' + seconds
+      let minutes = myDate.getUTCMinutes()
+      if (minutes < 10) {
+        minutes = '0' + minutes
+      }
 
-      setDate(dayOfWeek + ', ' + month + ' ' + day + ' | ' + time)
+      let hours = myDate.getHours()
+      let dayOrNight
+      if (hours < 12) {
+        dayOrNight = 'AM'
+      } else {
+        if (hours != 12) {
+          hours = hours - 12
+        }
+
+        dayOrNight = 'PM'
+      }
+
+      let time = hours + ':' + minutes + ':' + seconds + dayOrNight
+
+      setDate(dayOfWeek + ', ' + month + ' ' + day + ' (' + time + ')')
       setTimeout(setTime, 1000)
     }
 
@@ -66,7 +82,6 @@ function ServerPlay ({ setInGame }) {
 
     axios.get(ip + 'server/' + id).then(data => {
       if (data.data.length === 1) {
-        console.log(data.data[0])
         setTitle(data.data[0].server_name)
 
         const socket = io.connect('http://localhost:8002/' + id)
@@ -99,16 +114,26 @@ function ServerPlay ({ setInGame }) {
         const reply = document.createElement('li')
         let nameOfCommand = tokens[0].split('/')
         reply.innerHTML = 'Command: ' + nameOfCommand[1]
-        reply.setAttribute('style', 'color:gray;padding:10px 0px')
+        reply.setAttribute(
+          'style',
+          'padding: 5px 0; margin: 0;font-weight: 500;font-size: 14px;line-height: 1.5;color: #f58383'
+        )
         container.appendChild(reply)
         updateScroll()
       } else {
         const reply = document.createElement('li')
-        reply.setAttribute('style', 'padding:3px 0px')
+        reply.setAttribute('style', 'padding:0px 0px')
         const span1 = document.createElement('span')
-        span1.setAttribute('style', 'color:lightblue;')
-        span1.innerHTML = '[Player]: '
+        span1.setAttribute(
+          'style',
+          'padding: 0; margin: 0;font-weight: 500;font-size: 14px;line-height: 1.5;color: #83a0f5;'
+        )
+        span1.innerHTML = 'Player: '
         const span2 = document.createElement('span')
+        span2.setAttribute(
+          'style',
+          'padding: 0; margin: 0;font-weight: 300;font-size: 14px;line-height: 1.5;color: #83a0f5'
+        )
         span2.innerHTML = command
         reply.appendChild(span1)
         reply.appendChild(span2)
@@ -123,14 +148,17 @@ function ServerPlay ({ setInGame }) {
     const levelDescription =
       'Welcome to the zone. Many good things are on this level. So many cool things to see and do. I am trying to fill up as much space on this field as possible. Is this working now?'
     const container = document.getElementById('gametext')
-    const levelNameHeader = document.createElement('h4')
+    const levelNameHeader = document.createElement('h5')
     const span1 = document.createElement('span')
     const span2 = document.createElement('span')
 
-    levelNameHeader.setAttribute('style', 'padding:10px 0 0 0;margin: 0')
+    levelNameHeader.setAttribute(
+      'style',
+      'padding:10px 0 0 0;margin: 0;font-size: 14px;font-weight: 400;line-height: 1.5'
+    )
     span1.setAttribute('style', 'color:white')
     span1.innerHTML = 'Entering: '
-    span2.setAttribute('style', 'color:#BEA138;')
+    span2.setAttribute('style', 'color:#f5c983;')
     span2.innerHTML = 'The Zone'
     levelNameHeader.appendChild(span1)
     levelNameHeader.appendChild(span2)
@@ -138,7 +166,10 @@ function ServerPlay ({ setInGame }) {
 
     const levelDescriptionHeader = document.createElement('li')
     levelDescriptionHeader.innerHTML = levelDescription
-    levelDescriptionHeader.setAttribute('style', 'padding: 10px 0; margin: 0')
+    levelDescriptionHeader.setAttribute(
+      'style',
+      'padding: 0 0 10px 0; margin: 0;font-weight: 300;font-size: 14px;line-height: 1.5'
+    )
     container.appendChild(levelDescriptionHeader)
 
     updateScroll()
@@ -156,69 +187,72 @@ function ServerPlay ({ setInGame }) {
       ) : (
         <div className='row'>
           <div className='left-column'>
-            <center>
-              <div
-                className='header'
+            <div
+              className='header'
+              style={{
+                width: '100%',
+                paddingTop: '15px'
+              }}
+            >
+              <img
+                src={Logo}
                 style={{
-                  width: '100%',
-                  paddingTop: '15px'
+                  width: '50px',
+                  display: 'block',
+                  float: 'left',
+                  marginBottom: '16px'
+                }}
+                alt='a wizard hat with a feather in it'
+              />
+              <div
+                style={{
+                  marginLeft: '10px',
+                  display: 'block',
+                  float: 'left'
                 }}
               >
-                <img
-                  src={Logo}
+                <h1 style={{ padding: 0, margin: 0, fontSize: '16px' }}>
+                  {title}
+                </h1>
+                <h2 style={{ padding: 0, margin: 0, fontSize: '12px' }}>
+                  <span style={{ color: '#f5c983' }}>Players Online:</span>{' '}
+                  {players}
+                </h2>
+                <h2
                   style={{
-                    width: '50px',
-                    display: 'block',
-                    // float: 'left',
-                    marginBottom: '16px'
-                  }}
-                  alt='a wizard hat with a feather in it'
-                />
-                <div
-                  style={{
-                    marginLeft: '10px',
-                    display: 'block'
-                    // float: 'left'
+                    padding: 0,
+                    margin: 0,
+                    fontSize: '12px',
+                    fontWeight: '300'
                   }}
                 >
-                  <h1 style={{ padding: 0, margin: 0, fontSize: '16px' }}>
-                    {title}
-                  </h1>
-                  <h2 style={{ padding: 0, margin: 0, fontSize: '12px' }}>
-                    <span style={{ color: '#BEA138' }}>Players Online:</span>{' '}
-                    {players}
-                  </h2>
-                  <h2
-                    style={{
-                      padding: 0,
-                      margin: 0,
-                      fontSize: '12px',
-                      fontWeight: '300'
-                    }}
-                  >
-                    {date}
-                  </h2>
-                </div>
+                  {date}
+                </h2>
               </div>
-            </center>
+            </div>
             <br />
 
             <center>
               <div
                 style={{
-                  width: '250px',
+                  width: '100%',
                   height: '250px',
-                  backgroundColor: '#191A1C'
+                  backgroundColor: '#191A1C',
+                  display: 'block',
+                  float: 'left',
+                  margin: 'auto'
                 }}
               />
             </center>
+
             <a
               href='/servers/'
               style={{
                 width: '100%',
-                margin: '100px auto',
                 display: 'block',
-                textAlign: 'center'
+                textAlign: 'center',
+                display: 'block',
+                float: 'left'
               }}
             >
               Exit Game
@@ -229,7 +263,7 @@ function ServerPlay ({ setInGame }) {
               id='gametextdiv'
               style={{
                 width: '100%',
-                height: '95vh',
+                height: '92vh',
                 bottom: '0',
                 overflow: 'auto'
               }}
@@ -263,7 +297,100 @@ function ServerPlay ({ setInGame }) {
               />
             </center>
           </div>
-          <div className='right-column'></div>
+          <div className='right-column'>
+            <h5 style={{ padding: '5px', margin: '0', textAlign: 'center' }}>
+              Experience
+            </h5>
+            <div
+              className='experience-container'
+              style={{
+                boxSizing: 'border-box',
+                width: '90%',
+                backgroundColor: 'rgb(55, 56, 58)',
+                borderRadius: '6px',
+                margin: 'auto'
+              }}
+            >
+              <div
+                className='experience-bar'
+                style={{
+                  height: '10px',
+                  width: '50%',
+                  backgroundColor: '#4150DA',
+                  borderRadius: '6px'
+                }}
+              />
+            </div>
+            <h5 style={{ padding: '5px', margin: '0', textAlign: 'center' }}>
+              Health
+            </h5>
+            <div
+              className='health-container'
+              style={{
+                boxSizing: 'border-box',
+                width: '90%',
+                backgroundColor: 'rgb(55, 56, 58)',
+                borderRadius: '6px',
+                margin: 'auto'
+              }}
+            >
+              <div
+                className='health-bar'
+                style={{
+                  height: '10px',
+                  width: '50%',
+                  backgroundColor: '#DA4141',
+                  borderRadius: '6px'
+                }}
+              />
+            </div>
+            <h5 style={{ padding: '5px', margin: '0', textAlign: 'center' }}>
+              Mana
+            </h5>
+            <div
+              className='mana-container'
+              style={{
+                boxSizing: 'border-box',
+                width: '90%',
+                backgroundColor: 'rgb(55, 56, 58)',
+                borderRadius: '6px',
+                margin: 'auto'
+              }}
+            >
+              <div
+                className='mana-bar'
+                style={{
+                  height: '10px',
+                  width: '50%',
+                  backgroundColor: '#EB0BFF',
+                  borderRadius: '6px'
+                }}
+              />
+            </div>
+            <h5 style={{ padding: '5px', margin: '0', textAlign: 'center' }}>
+              Stamina
+            </h5>
+            <div
+              className='stamina-container'
+              style={{
+                boxSizing: 'border-box',
+                width: '90%',
+                backgroundColor: 'rgb(55, 56, 58)',
+                margin: 'auto',
+                borderRadius: '6px'
+              }}
+            >
+              <div
+                className='stamina-bar'
+                style={{
+                  height: '10px',
+                  width: '50%',
+                  backgroundColor: '#41DA47',
+                  borderRadius: '6px'
+                }}
+              />
+            </div>
+          </div>
         </div>
       )}
     </div>
