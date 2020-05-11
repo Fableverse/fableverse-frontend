@@ -74,6 +74,7 @@ function ServerPlay ({ setInGame }) {
           setPlayers(data)
 
           setIsLoading(false)
+          onEnter()
         })
       } else {
         console.log('SERVER DOES NOT EXISTS')
@@ -86,6 +87,68 @@ function ServerPlay ({ setInGame }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  function handleCommand () {
+    const container = document.getElementById('gametext')
+    const command = document.getElementById('gameinput').value
+    document.getElementById('gameinput').value = ''
+
+    if (command !== '') {
+      if (command.charAt(0) === '/') {
+        const tokens = command.split(' ')
+
+        const reply = document.createElement('li')
+        let nameOfCommand = tokens[0].split('/')
+        reply.innerHTML = 'Command: ' + nameOfCommand[1]
+        reply.setAttribute('style', 'color:gray;padding:10px 0px')
+        container.appendChild(reply)
+        updateScroll()
+      } else {
+        const reply = document.createElement('li')
+        reply.setAttribute('style', 'padding:3px 0px')
+        const span1 = document.createElement('span')
+        span1.setAttribute('style', 'color:lightblue;')
+        span1.innerHTML = '[Player]: '
+        const span2 = document.createElement('span')
+        span2.innerHTML = command
+        reply.appendChild(span1)
+        reply.appendChild(span2)
+        container.appendChild(reply)
+        updateScroll()
+      }
+    }
+  }
+
+  function onEnter () {
+    const levelName = 'The Zone'
+    const levelDescription =
+      'Welcome to the zone. Many good things are on this level. So many cool things to see and do. I am trying to fill up as much space on this field as possible. Is this working now?'
+    const container = document.getElementById('gametext')
+    const levelNameHeader = document.createElement('h4')
+    const span1 = document.createElement('span')
+    const span2 = document.createElement('span')
+
+    levelNameHeader.setAttribute('style', 'padding:10px 0 0 0;margin: 0')
+    span1.setAttribute('style', 'color:white')
+    span1.innerHTML = 'Entering: '
+    span2.setAttribute('style', 'color:#BEA138;')
+    span2.innerHTML = 'The Zone'
+    levelNameHeader.appendChild(span1)
+    levelNameHeader.appendChild(span2)
+    container.appendChild(levelNameHeader)
+
+    const levelDescriptionHeader = document.createElement('li')
+    levelDescriptionHeader.innerHTML = levelDescription
+    levelDescriptionHeader.setAttribute('style', 'padding: 10px 0; margin: 0')
+    container.appendChild(levelDescriptionHeader)
+
+    updateScroll()
+  }
+
+  function updateScroll () {
+    var element = document.getElementById('gametextdiv')
+    element.scrollTop = element.scrollHeight
+  }
+
   return (
     <div>
       {isLoading ? (
@@ -93,53 +156,62 @@ function ServerPlay ({ setInGame }) {
       ) : (
         <div className='row'>
           <div className='left-column'>
-            <div
-              className='header'
-              style={{ width: '100%', paddingTop: '15px' }}
-            >
-              <img
-                src={Logo}
-                style={{
-                  width: '50px',
-                  display: 'block',
-                  float: 'left',
-                  marginTop: '6px'
-                }}
-                alt='a wizard hat with a feather in it'
-              />
+            <center>
               <div
-                style={{ marginLeft: '25px', display: 'block', float: 'left' }}
+                className='header'
+                style={{
+                  width: '100%',
+                  paddingTop: '15px'
+                }}
               >
-                <h1 style={{ padding: 0, margin: 0, fontSize: '16px' }}>
-                  {title}
-                </h1>
-                <h2 style={{ padding: 0, margin: 0, fontSize: '12px' }}>
-                  <span style={{ color: '#BEA138' }}>Players Online:</span>{' '}
-                  {players}
-                </h2>
-                <h2
+                <img
+                  src={Logo}
                   style={{
-                    padding: 0,
-                    margin: 0,
-                    fontSize: '12px',
-                    fontWeight: '300'
+                    width: '50px',
+                    display: 'block',
+                    // float: 'left',
+                    marginBottom: '16px'
+                  }}
+                  alt='a wizard hat with a feather in it'
+                />
+                <div
+                  style={{
+                    marginLeft: '10px',
+                    display: 'block'
+                    // float: 'left'
                   }}
                 >
-                  {date}
-                </h2>
+                  <h1 style={{ padding: 0, margin: 0, fontSize: '16px' }}>
+                    {title}
+                  </h1>
+                  <h2 style={{ padding: 0, margin: 0, fontSize: '12px' }}>
+                    <span style={{ color: '#BEA138' }}>Players Online:</span>{' '}
+                    {players}
+                  </h2>
+                  <h2
+                    style={{
+                      padding: 0,
+                      margin: 0,
+                      fontSize: '12px',
+                      fontWeight: '300'
+                    }}
+                  >
+                    {date}
+                  </h2>
+                </div>
               </div>
-            </div>
+            </center>
             <br />
-            <br />
-            <br />
-            <br />
-            <div
-              style={{
-                width: '330px',
-                height: '300px',
-                backgroundColor: '#191A1C'
-              }}
-            ></div>
+
+            <center>
+              <div
+                style={{
+                  width: '250px',
+                  height: '250px',
+                  backgroundColor: '#191A1C'
+                }}
+              />
+            </center>
             <a
               href='/servers/'
               style={{
@@ -153,16 +225,40 @@ function ServerPlay ({ setInGame }) {
             </a>
           </div>
           <div className='center-column'>
+            <div
+              id='gametextdiv'
+              style={{
+                width: '100%',
+                height: '95vh',
+                bottom: '0',
+                overflow: 'auto'
+              }}
+            >
+              <ul
+                id='gametext'
+                className='gametext'
+                style={{
+                  boxSizing: 'border-box',
+                  display: 'block',
+                  bottom: '0',
+                  width: '100%',
+                  margin: 0,
+                  padding: '30px 30px',
+                  listStyle: 'none'
+                }}
+              />
+            </div>
             <center>
               <input
-                className='textarea input'
+                className='gameinput'
+                id='gameinput'
                 type='text'
-                placeholder='Enter your message...'
-                style={{
-                  width: '90%',
-                  padding: '10px',
-                  margin: '10px',
-                  borderRadius: '6px'
+                placeholder='Type a command here...'
+                autoFocus={true}
+                onKeyPress={event => {
+                  if (event.key === 'Enter') {
+                    handleCommand()
+                  }
                 }}
               />
             </center>
