@@ -194,19 +194,8 @@ function ServerPlay ({ setInGame }) {
                 paddingTop: '15px'
               }}
             >
-              <img
-                src={Logo}
-                style={{
-                  width: '50px',
-                  display: 'block',
-                  float: 'left',
-                  marginBottom: '16px'
-                }}
-                alt='a wizard hat with a feather in it'
-              />
               <div
                 style={{
-                  marginLeft: '10px',
                   display: 'block',
                   float: 'left'
                 }}
@@ -245,18 +234,55 @@ function ServerPlay ({ setInGame }) {
               />
             </center>
 
-            <a
-              href='/servers/'
-              style={{
-                width: '100%',
-                display: 'block',
-                textAlign: 'center',
-                display: 'block',
-                float: 'left'
-              }}
-            >
-              Exit Game
-            </a>
+            <center>
+              <img
+                src={Logo}
+                style={{
+                  width: '20px',
+                  marginTop: '150px',
+                  marginBottom: '5px'
+                }}
+                alt='a wizard hat with a feather in it'
+              />
+              <a
+                href='/servers/'
+                style={{
+                  width: '100%',
+                  display: 'block',
+                  textAlign: 'center',
+                  marginBottom: '5px',
+                  fontSize: '14px'
+                }}
+              >
+                Privacy Policy
+              </a>
+              <a
+                href='/servers/'
+                style={{
+                  width: '100%',
+                  display: 'block',
+                  textAlign: 'center',
+                  marginBottom: '5px',
+                  fontSize: '14px'
+                }}
+              >
+                Report a Bug
+              </a>
+              <a
+                href='/servers/'
+                style={{
+                  width: '100%',
+                  display: 'block',
+                  textAlign: 'center',
+                  fontSize: '14px'
+                }}
+              >
+                Exit Game
+              </a>
+              <h5 style={{ color: '#f5c983', margin: '20px', padding: 0 }}>
+                &copy; 2020 Fableverse, LLC
+              </h5>
+            </center>
           </div>
           <div className='center-column'>
             <div
@@ -314,7 +340,7 @@ function ServerPlay ({ setInGame }) {
               <div
                 className='experience-bar'
                 style={{
-                  height: '10px',
+                  height: '6px',
                   width: '50%',
                   backgroundColor: '#4150DA',
                   borderRadius: '6px'
@@ -337,7 +363,7 @@ function ServerPlay ({ setInGame }) {
               <div
                 className='health-bar'
                 style={{
-                  height: '10px',
+                  height: '6px',
                   width: '50%',
                   backgroundColor: '#DA4141',
                   borderRadius: '6px'
@@ -360,7 +386,7 @@ function ServerPlay ({ setInGame }) {
               <div
                 className='mana-bar'
                 style={{
-                  height: '10px',
+                  height: '6px',
                   width: '50%',
                   backgroundColor: '#EB0BFF',
                   borderRadius: '6px'
@@ -383,7 +409,7 @@ function ServerPlay ({ setInGame }) {
               <div
                 className='stamina-bar'
                 style={{
-                  height: '10px',
+                  height: '6px',
                   width: '50%',
                   backgroundColor: '#41DA47',
                   borderRadius: '6px'
