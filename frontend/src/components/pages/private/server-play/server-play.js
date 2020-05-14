@@ -19,6 +19,7 @@ function ServerPlay ({ setInGame }) {
   const [date, setDate] = useState()
   const [isLoading, setIsLoading] = useState(true)
   const [createCharacter, setCreateCharacter] = useState(false)
+  const [character, setCharacter] = useState(null)
   const { id } = useParams()
 
   useEffect(() => {
@@ -81,6 +82,8 @@ function ServerPlay ({ setInGame }) {
     }
     axios.get(ip + 'server/' + id + '/character').then(data => {
       if (data.data.length === 1) {
+        setCharacter(data.data[0])
+        console.log(data.data[0])
         axios.get(ip + 'server/' + id).then(data => {
           if (data.data.length === 1) {
             setTitle(data.data[0].server_name)
@@ -333,6 +336,14 @@ function ServerPlay ({ setInGame }) {
             </center>
           </div>
           <div className='right-column'>
+            <h3 style={{ margin: '15px' }}>
+              {character.username}{' '}
+              <span style={{ float: 'right' }}>
+                <span style={{ color: 'rgb(245, 201, 131)' }}>Level: </span>
+                {character.level}
+              </span>
+            </h3>
+
             <h5 style={{ padding: '5px', margin: '0', textAlign: 'center' }}>
               Experience
             </h5>
@@ -373,7 +384,10 @@ function ServerPlay ({ setInGame }) {
                 className='health-bar'
                 style={{
                   height: '6px',
-                  width: '50%',
+                  width:
+                    (parseFloat(character.health) / character.max_health) *
+                      100 +
+                    '%',
                   backgroundColor: '#DA4141',
                   borderRadius: '6px'
                 }}
