@@ -5,6 +5,7 @@ import io from 'socket.io-client'
 import Logo from '../../../../images/logotransparent-white.png'
 
 import Loading from '../../../loading/loading'
+import ServerCharacter from '../server-character/server-character'
 
 import axios from 'axios'
 
@@ -17,6 +18,7 @@ function ServerPlay ({ setInGame }) {
   const [title, setTitle] = useState('')
   const [date, setDate] = useState()
   const [isLoading, setIsLoading] = useState(true)
+  const [createCharacter, setCreateCharacter] = useState(false)
   const { id } = useParams()
 
   useEffect(() => {
@@ -65,7 +67,7 @@ function ServerPlay ({ setInGame }) {
       if (hours < 12) {
         dayOrNight = 'AM'
       } else {
-        if (hours != 12) {
+        if (hours !== 12) {
           hours = hours - 12
         }
 
@@ -77,22 +79,27 @@ function ServerPlay ({ setInGame }) {
       setDate(dayOfWeek + ', ' + month + ' ' + day + ' (' + time + ')')
       setTimeout(setTime, 1000)
     }
-
-    setInGame(true)
-
-    axios.get(ip + 'server/' + id).then(data => {
+    axios.get(ip + 'server/' + id + '/character').then(data => {
       if (data.data.length === 1) {
-        setTitle(data.data[0].server_name)
+        axios.get(ip + 'server/' + id).then(data => {
+          if (data.data.length === 1) {
+            setTitle(data.data[0].server_name)
 
-        const socket = io.connect('http://localhost:8002/' + id)
-        socket.on('player count', function (data) {
-          setPlayers(data)
-
-          setIsLoading(false)
-          onEnter()
+            const socket = io.connect('http://localhost:8002/' + id)
+            socket.on('player count', function (data) {
+              setPlayers(data)
+              setInGame(true)
+              setIsLoading(false)
+              onEnter()
+            })
+          } else {
+            console.log('SERVER DOES NOT EXISTS')
+          }
         })
       } else {
-        console.log('SERVER DOES NOT EXISTS')
+        setInGame(true)
+        setIsLoading(false)
+        setCreateCharacter(true)
       }
     })
 
@@ -144,7 +151,7 @@ function ServerPlay ({ setInGame }) {
   }
 
   function onEnter () {
-    const levelName = 'The Zone'
+    const levelName = 'Default Room'
     const levelDescription =
       'Welcome to the zone. Many good things are on this level. So many cool things to see and do. I am trying to fill up as much space on this field as possible. Is this working now?'
     const container = document.getElementById('gametext')
@@ -159,7 +166,7 @@ function ServerPlay ({ setInGame }) {
     span1.setAttribute('style', 'color:white')
     span1.innerHTML = 'Entering: '
     span2.setAttribute('style', 'color:#f5c983;')
-    span2.innerHTML = 'The Zone'
+    span2.innerHTML = levelName
     levelNameHeader.appendChild(span1)
     levelNameHeader.appendChild(span2)
     container.appendChild(levelNameHeader)
@@ -182,7 +189,9 @@ function ServerPlay ({ setInGame }) {
 
   return (
     <div>
-      {isLoading ? (
+      {createCharacter ? (
+        <ServerCharacter />
+      ) : isLoading ? (
         <Loading />
       ) : (
         <div className='row'>
