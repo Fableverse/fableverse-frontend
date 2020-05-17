@@ -20,6 +20,7 @@ function ServerPlay ({ setInGame }) {
   const [isLoading, setIsLoading] = useState(true)
   const [createCharacter, setCreateCharacter] = useState(false)
   const [character, setCharacter] = useState(null)
+  const [socket, setSocket] = useState(null)
   const { id } = useParams()
 
   useEffect(() => {
@@ -81,7 +82,8 @@ function ServerPlay ({ setInGame }) {
       setTimeout(setTime, 1000)
     }
     axios.get(ip + 'server/' + id + '/character').then(data => {
-      if (data.data.length === 1) {
+      console.log(data.data)
+      if (data.data.length != 0) {
         setCharacter(data.data[0])
         console.log(data.data[0])
         axios.get(ip + 'server/' + id).then(data => {
@@ -89,11 +91,37 @@ function ServerPlay ({ setInGame }) {
             setTitle(data.data[0].server_name)
 
             const socket = io.connect('http://localhost:8002/' + id)
+            setSocket(socket)
             socket.on('player count', function (data) {
               setPlayers(data)
               setInGame(true)
               setIsLoading(false)
-              onEnter()
+            })
+
+            // socket.on('connect', function () {
+            //   onEnter()
+            // })
+
+            socket.on('chat recieve', function (chat) {
+              const reply = document.createElement('li')
+              reply.setAttribute('style', 'padding:0px 0px')
+              const span1 = document.createElement('span')
+              span1.setAttribute(
+                'style',
+                'padding: 0; margin: 0;font-weight: 500;font-size: 14px;line-height: 1.5;color: #83a0f5;'
+              )
+              span1.innerHTML = chat.from + ': '
+              const span2 = document.createElement('span')
+              span2.setAttribute(
+                'style',
+                'padding: 0; margin: 0;font-weight: 300;font-size: 14px;line-height: 1.5;color: #83a0f5'
+              )
+              span2.innerHTML = chat.message
+              reply.appendChild(span1)
+              reply.appendChild(span2)
+              const container = document.getElementById('gametext')
+              container.appendChild(reply)
+              updateScroll()
             })
           } else {
             console.log('SERVER DOES NOT EXISTS')
@@ -131,24 +159,29 @@ function ServerPlay ({ setInGame }) {
         container.appendChild(reply)
         updateScroll()
       } else {
-        const reply = document.createElement('li')
-        reply.setAttribute('style', 'padding:0px 0px')
-        const span1 = document.createElement('span')
-        span1.setAttribute(
-          'style',
-          'padding: 0; margin: 0;font-weight: 500;font-size: 14px;line-height: 1.5;color: #83a0f5;'
-        )
-        span1.innerHTML = 'Player: '
-        const span2 = document.createElement('span')
-        span2.setAttribute(
-          'style',
-          'padding: 0; margin: 0;font-weight: 300;font-size: 14px;line-height: 1.5;color: #83a0f5'
-        )
-        span2.innerHTML = command
-        reply.appendChild(span1)
-        reply.appendChild(span2)
-        container.appendChild(reply)
-        updateScroll()
+        // const reply = document.createElement('li')
+        // reply.setAttribute('style', 'padding:0px 0px')
+        // const span1 = document.createElement('span')
+        // span1.setAttribute(
+        //   'style',
+        //   'padding: 0; margin: 0;font-weight: 500;font-size: 14px;line-height: 1.5;color: #83a0f5;'
+        // )
+        // span1.innerHTML = 'Player: '
+        // const span2 = document.createElement('span')
+        // span2.setAttribute(
+        //   'style',
+        //   'padding: 0; margin: 0;font-weight: 300;font-size: 14px;line-height: 1.5;color: #83a0f5'
+        // )
+        // span2.innerHTML = command
+        // reply.appendChild(span1)
+        // reply.appendChild(span2)
+        // container.appendChild(reply)
+        // updateScroll()
+        const chat = {
+          message: command,
+          from: character.username
+        }
+        socket.emit('chat send', chat)
       }
     }
   }
@@ -194,7 +227,7 @@ function ServerPlay ({ setInGame }) {
     <div>
       {createCharacter ? (
         <ServerCharacter />
-      ) : isLoading ? (
+      ) : isLoading || character == null ? (
         <Loading />
       ) : (
         <div className='row'>
