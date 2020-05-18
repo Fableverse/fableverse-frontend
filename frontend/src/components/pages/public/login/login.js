@@ -9,7 +9,6 @@ function Login ({ login, isLoading }) {
 
   return (
     <div>
-      <h1>Update</h1>
       {isLoading ? (
         ''
       ) : (
