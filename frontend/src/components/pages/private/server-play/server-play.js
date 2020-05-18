@@ -9,8 +9,8 @@ import ServerCharacter from '../server-character/server-character'
 
 import axios from 'axios'
 
-const ip = 'http://161.35.111.85:8001/'
-const socketip = 'http://161.35.111.85:8002/'
+const ip = process.env.REACT_APP_API_IP
+const socketip = process.env.REACT_APP_SOCKET_IP
 
 // let isLoading = true
 

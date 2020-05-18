@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 
-const ip = 'http://161.35.111.85:8001/'
+const ip = process.env.REACT_APP_API_IP
 
 function ServerCreate () {
   let history = useHistory()

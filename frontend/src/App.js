@@ -12,7 +12,8 @@ import ServerCreate from './components/pages/private/server-create/server-create
 import ServerList from './components/pages/private/server-list/server-list'
 import ServerPlay from './components/pages/private/server-play/server-play'
 
-const ip = 'http://161.35.111.85:8001/'
+const ip = process.env.REACT_APP_API_IP
+
 let validated = false
 let isAuthenticated = false
 axios.defaults.withCredentials = true
