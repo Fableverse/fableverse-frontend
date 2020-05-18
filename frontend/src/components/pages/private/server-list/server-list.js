@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import Loading from '../../../loading/loading'
 
-const ip = 'http://localhost:8001/'
+const ip = 'http://161.35.111.85:8001/'
 
 function ServerCreate () {
   const [servers, setServers] = useState([])

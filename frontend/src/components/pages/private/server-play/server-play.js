@@ -9,7 +9,8 @@ import ServerCharacter from '../server-character/server-character'
 
 import axios from 'axios'
 
-const ip = 'http://localhost:8001/'
+const ip = 'http://161.35.111.85:8001/'
+const socketip = 'http://161.35.111.85:8002/'
 
 // let isLoading = true
 
@@ -90,7 +91,7 @@ function ServerPlay ({ setInGame }) {
           if (data.data.length === 1) {
             setTitle(data.data[0].server_name)
 
-            const socket = io.connect('http://localhost:8002/' + id)
+            const socket = io.connect(socketip + id)
             setSocket(socket)
             socket.on('player count', function (data) {
               setPlayers(data)
