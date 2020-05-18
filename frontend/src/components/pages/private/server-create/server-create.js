@@ -1,9 +1,11 @@
 import React from 'react'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 const ip = 'http://localhost:8001/'
 
 function ServerCreate () {
+  let history = useHistory()
   function handleCreate () {
     const serverName = document.getElementById('serverName').value
     const serverDescription = document.getElementById('serverDescription').value
@@ -15,6 +17,7 @@ function ServerCreate () {
       })
       .then(res => {
         console.log(res.status)
+        window.location.href = '/servers/'
       })
       .catch(function (error) {
         console.log(error)

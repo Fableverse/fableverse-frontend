@@ -93,6 +93,7 @@ function App () {
       })
       .then(res => {
         console.log(res.status)
+        history.push('/login')
       })
       .catch(function (error) {
         console.log(error)

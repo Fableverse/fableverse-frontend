@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 import Loading from '../../../loading/loading'
@@ -8,6 +8,8 @@ import Loading from '../../../loading/loading'
 const ip = 'http://localhost:8001/'
 
 function ServerCharacter () {
+  let history = useHistory()
+
   const { id } = useParams()
   //   const [characters, setCharacters] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -24,6 +26,7 @@ function ServerCharacter () {
       })
       .then(res => {
         console.log(res)
+        window.location.href = '/servers/' + id
       })
   }
 
