@@ -4,6 +4,8 @@ import './App.css'
 import { Switch, Route, Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
+import Logo from './images/logo.jpg'
+
 import Landing from './components/pages/public/landing/landing'
 import Login from './components/pages/public/login/login'
 import Register from './components/pages/public/register/register'
@@ -11,6 +13,18 @@ import Motd from './components/pages/private/motd/motd'
 import ServerCreate from './components/pages/private/server-create/server-create'
 import ServerList from './components/pages/private/server-list/server-list'
 import ServerPlay from './components/pages/private/server-play/server-play'
+
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Form from 'react-bootstrap/Form'
+import Badge from 'react-bootstrap/Badge'
+
+import Background from './images/background.jpg'
+import Music from './audio/music.wav'
 
 const ip = process.env.REACT_APP_API_IP
 
@@ -119,46 +133,86 @@ function App () {
       {inGame || isLoading ? (
         ''
       ) : (
-        <nav>
-          <ul>
-            <li>
-              <Link to='/'>Home</Link>
-            </li>
-            {isAuthenticated ? (
-              ''
-            ) : (
-              <div>
-                <li>
-                  <Link to='/login'>Login</Link>
-                </li>
-                <li>
-                  <Link to='/register'>Register</Link>
-                </li>
-              </div>
-            )}
+        <div>
+          <Navbar
+            collapseOnSelect
+            expand='lg'
+            variant='dark'
+            style={{ backgroundColor: 'white !important' }}
+          >
+            <Navbar.Brand href='#home' className='title'>
+              {/* <img
+              src={Logo}
+              style={{ width: '40px' }}
+              alt='a gray hat and feather'
+            /> */}
+              FABLEVERSE
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+            <Navbar.Collapse id='responsive-navbar-nav'>
+              <Nav className='mr-auto'></Nav>
+              <Nav>
+                <Nav.Link>NEWS</Nav.Link>
+                <Nav.Link>ABOUT</Nav.Link>
+                <Nav.Link>SOLUTIONS</Nav.Link>
+                <Nav.Link>LEARNING & SUPPORT</Nav.Link>
+                <Nav.Link>COMMUNITY</Nav.Link>
+                <Nav.Link>MARKETPLACE</Nav.Link>
+                <Nav.Link>SIGN IN</Nav.Link>
+                <Button>GET STARTED</Button>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+          <img
+            src={Background}
+            style={{ width: '100%', height: '92vh', objectFit: 'cover' }}
+          />
+          <audio autoPlay loop>
+            <source src={Music} type='audio/wav' />
+            Your browser does not support the audio element.
+          </audio>
+        </div>
 
-            {isAuthenticated ? (
-              <div>
-                <li>
-                  <Link to='/servers/create'>Create Server</Link>
-                </li>
-                <li>
-                  <Link to='/servers/'>Server List</Link>
-                </li>
-                <li>
-                  <Link to='/login' onClick={signout}>
-                    Signout
-                  </Link>
-                </li>
-              </div>
-            ) : (
-              ''
-            )}
-          </ul>
-        </nav>
+        // <nav>
+        //   <ul>
+        //     <li>
+        //       <Link to='/'>Home</Link>
+        //     </li>
+        //     {isAuthenticated ? (
+        //       ''
+        //     ) : (
+        //       <div>
+        //         <li>
+        //           <Link to='/login'>Login</Link>
+        //         </li>
+        //         <li>
+        //           <Link to='/register'>Register</Link>
+        //         </li>
+        //       </div>
+        //     )}
+
+        //     {isAuthenticated ? (
+        //       <div>
+        //         <li>
+        //           <Link to='/servers/create'>Create Server</Link>
+        //         </li>
+        //         <li>
+        //           <Link to='/servers/'>Server List</Link>
+        //         </li>
+        //         <li>
+        //           <Link to='/login' onClick={signout}>
+        //             Signout
+        //           </Link>
+        //         </li>
+        //       </div>
+        //     ) : (
+        //       ''
+        //     )}
+        //   </ul>
+        // </nav>
       )}
 
-      <Switch>
+      {/* <Switch>
         <Route path='/login'>
           <Login login={login} isLoading={isLoading} />
         </Route>
@@ -190,7 +244,7 @@ function App () {
             <Landing />
           </Route>
         )}
-      </Switch>
+      </Switch> */}
     </div>
   )
 }

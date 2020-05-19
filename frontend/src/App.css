@@ -1,10 +1,4 @@
-body {
-  background-color: #191a1c;
-  color: #ddd;
-  font-family: 'Ubuntu', sans-serif;
-}
-
-.left-column {
+/* .left-column {
   position: absolute;
   left: 0;
   width: 330px;
@@ -36,7 +30,6 @@ a {
   text-decoration: none;
 }
 
-/* Clear floats after the columns */
 .row:after {
   content: '';
   display: table;
@@ -50,12 +43,101 @@ a {
   width: 95%;
   height: 40px;
   padding: 10px;
-  /* margin: '20px auto', */
-  /* borderRadius: '6px', */
-  /* position: 'absolute', */
-  /* bottom: '0', */
 
   background-color: rgb(18, 19, 21);
   border: 1px solid #424242;
   color: white;
+} */
+
+html {
+  scroll-behavior: smooth;
+  background-color: #2a2a2a;
+}
+
+.btn-primary {
+  background-color: #2196f3 !important;
+  border-color: #137ace !important;
+  box-shadow: rgba(0, 0, 0, 0.2) 5px 5px 5px;
+  border-radius: 2px;
+  font-size: 12px;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #1585e0 !important;
+  border-color: #137ace !important;
+  transition: 0.3s;
+}
+
+.btn-secondary {
+  background-color: rgb(141, 138, 165) !important;
+  border-color: rgb(141, 138, 165) !important;
+  border-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.2) 5px 5px 5px;
+  font-size: 12px;
+  transition: 0.3s;
+}
+
+.btn-secondary:hover {
+  background-color: rgb(110, 107, 134) !important;
+  border-color: rgb(110, 107, 134) !important;
+  box-shadow: 4px 4px 9px rgba(0, 0, 0, 0.12);
+  transition: 0.3s;
+}
+
+.nav-link {
+  font-size: 12px;
+  color: #ccc !important;
+}
+
+.nav-link:hover {
+  color: white !important;
+}
+
+.navbar {
+  background-color: #2a2a2a;
+}
+
+h1 {
+  color: rgb(46, 40, 89) !important;
+}
+
+.title {
+  color: white !important;
+  font-family: 'Acme', sans-serif;
+  font-size: 22px;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.badge-primary {
+  color: #fff;
+  background-color: rgb(129, 85, 220);
+}
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #333; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  top: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+    However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
