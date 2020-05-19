@@ -17,14 +17,6 @@ import ServerPlay from './components/pages/private/server-play/server-play'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Form from 'react-bootstrap/Form'
-import Badge from 'react-bootstrap/Badge'
-
-import Background from './images/background.jpg'
-import Music from './audio/music.wav'
 
 const ip = process.env.REACT_APP_API_IP
 
@@ -140,37 +132,47 @@ function App () {
             variant='dark'
             style={{ backgroundColor: 'white !important' }}
           >
-            <Navbar.Brand href='#home' className='title'>
-              {/* <img
+            <Link to='/'>
+              <Navbar.Brand className='title'>
+                {/* <img
               src={Logo}
               style={{ width: '40px' }}
               alt='a gray hat and feather'
             /> */}
-              FABLEVERSE
-            </Navbar.Brand>
+                FABLEVERSE
+              </Navbar.Brand>
+            </Link>
             <Navbar.Toggle aria-controls='responsive-navbar-nav' />
             <Navbar.Collapse id='responsive-navbar-nav'>
               <Nav className='mr-auto'></Nav>
               <Nav>
-                <Nav.Link>NEWS</Nav.Link>
-                <Nav.Link>ABOUT</Nav.Link>
-                <Nav.Link>SOLUTIONS</Nav.Link>
-                <Nav.Link>LEARNING & SUPPORT</Nav.Link>
-                <Nav.Link>COMMUNITY</Nav.Link>
-                <Nav.Link>MARKETPLACE</Nav.Link>
-                <Nav.Link>SIGN IN</Nav.Link>
-                <Button>GET STARTED</Button>
+                <Link className='nav-link' to='/'>
+                  NEWS
+                </Link>
+                <Link className='nav-link' to='/'>
+                  ABOUT
+                </Link>
+                <Link className='nav-link' to='/'>
+                  SOLUTIONS
+                </Link>
+                <Link className='nav-link' to='/'>
+                  LEARNING & SUPPORT
+                </Link>
+                <Link className='nav-link' to='/'>
+                  COMMUNITY
+                </Link>
+                <Link className='nav-link' to='/'>
+                  MARKETPLACE
+                </Link>
+                <Link className='nav-link' to='/login'>
+                  SIGN IN
+                </Link>
+                <Link to='/register'>
+                  <Button>GET STARTED</Button>
+                </Link>
               </Nav>
             </Navbar.Collapse>
           </Navbar>
-          <img
-            src={Background}
-            style={{ width: '100%', height: '92vh', objectFit: 'cover' }}
-          />
-          <audio autoPlay loop>
-            <source src={Music} type='audio/wav' />
-            Your browser does not support the audio element.
-          </audio>
         </div>
 
         // <nav>
@@ -212,7 +214,7 @@ function App () {
         // </nav>
       )}
 
-      {/* <Switch>
+      <Switch>
         <Route path='/login'>
           <Login login={login} isLoading={isLoading} />
         </Route>
@@ -244,7 +246,7 @@ function App () {
             <Landing />
           </Route>
         )}
-      </Switch> */}
+      </Switch>
     </div>
   )
 }
