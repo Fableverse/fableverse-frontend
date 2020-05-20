@@ -74,6 +74,19 @@ body {
   transition: 0.3s;
 }
 
+.btn-outline-primary {
+  border-color: #2196f3;
+  color: white;
+  border-width: 2px;
+  border-radius: 2px;
+  padding: 20px 40px;
+}
+
+.btn-outline-primary:hover {
+  background-color: #2196f3 !important;
+  border-color: #137ace !important;
+}
+
 .btn-secondary {
   background-color: rgb(141, 138, 165) !important;
   border-color: rgb(141, 138, 165) !important;

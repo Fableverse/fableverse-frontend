@@ -14,6 +14,8 @@ import ServerCreate from './components/pages/private/server-create/server-create
 import ServerList from './components/pages/private/server-list/server-list'
 import ServerPlay from './components/pages/private/server-play/server-play'
 
+import Footer from './components/footer/footer'
+
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
@@ -162,6 +164,9 @@ function App () {
                   COMMUNITY
                 </Link>
                 <Link className='nav-link' to='/'>
+                  SUBSCRIPTION
+                </Link>
+                <Link className='nav-link' to='/'>
                   MARKETPLACE
                 </Link>
                 <Link className='nav-link' to='/login'>
@@ -247,6 +252,8 @@ function App () {
           </Route>
         )}
       </Switch>
+
+      <Footer />
     </div>
   )
 }
