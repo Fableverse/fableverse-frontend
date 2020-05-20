@@ -12,11 +12,13 @@ function Footer () {
     <div style={{ backgroundColor: '#2a2a2a' }}>
       <Row
         style={{
-          margin: '30px',
+          margin: '0px',
           marginBottom: '0px',
+          paddingLeft: '30px',
           paddingTop: '30px',
           borderBottom: '1px solid rgba(255,255,255,.1)',
-          color: 'white'
+          color: 'white',
+          width: '100%'
         }}
       >
         <Col sm={6} style={{ paddingLeft: '0' }}>
@@ -25,10 +27,13 @@ function Footer () {
           </h1>
         </Col>
         <Col sm={3}>
-          <h5 class='text-uppercase' style={{ fontSize: '14px' }}>
+          <h5 className='text-uppercase' style={{ fontSize: '14px' }}>
             Resources
           </h5>
-          <ul class='list-unstyled' style={{ fontSize: '12px', color: 'grey' }}>
+          <ul
+            className='list-unstyled'
+            style={{ fontSize: '12px', color: 'grey' }}
+          >
             <li>
               <a href='#!'>Documentations</a>
             </li>
@@ -78,7 +83,9 @@ function Footer () {
           color: 'white',
           padding: '5px 30px',
           fontSize: '11px',
-          paddingBottom: '20px'
+          paddingBottom: '20px',
+          width: '100%',
+          margin: 0
         }}
       >
         <Col sm={12} style={{ fontSize: '12px' }}>

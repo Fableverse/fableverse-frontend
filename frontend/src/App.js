@@ -135,47 +135,61 @@ function App () {
             style={{ backgroundColor: 'white !important' }}
           >
             <Link to='/'>
-              <Navbar.Brand className='title'>
-                {/* <img
-              src={Logo}
-              style={{ width: '40px' }}
-              alt='a gray hat and feather'
-            /> */}
-                FABLEVERSE
-              </Navbar.Brand>
+              <Navbar.Brand className='title'>FABLEVERSE</Navbar.Brand>
             </Link>
             <Navbar.Toggle aria-controls='responsive-navbar-nav' />
             <Navbar.Collapse id='responsive-navbar-nav'>
               <Nav className='mr-auto'></Nav>
-              <Nav>
-                <Link className='nav-link' to='/'>
-                  NEWS
-                </Link>
-                <Link className='nav-link' to='/'>
-                  ABOUT
-                </Link>
-                <Link className='nav-link' to='/'>
-                  SOLUTIONS
-                </Link>
-                <Link className='nav-link' to='/'>
-                  LEARNING & SUPPORT
-                </Link>
-                <Link className='nav-link' to='/'>
-                  COMMUNITY
-                </Link>
-                <Link className='nav-link' to='/'>
-                  SUBSCRIPTION
-                </Link>
-                <Link className='nav-link' to='/'>
-                  MARKETPLACE
-                </Link>
-                <Link className='nav-link' to='/login'>
-                  SIGN IN
-                </Link>
-                <Link to='/register'>
-                  <Button>GET STARTED</Button>
-                </Link>
-              </Nav>
+
+              {isAuthenticated ? (
+                <Nav>
+                  <Link className='nav-link' to='/'>
+                    MARKETPLACE
+                  </Link>
+                  <Link className='nav-link' to='/'>
+                    MY GAMES
+                  </Link>
+                  <Link className='nav-link' to='/'>
+                    CREATE A GAME
+                  </Link>
+                  <Link className='nav-link' onClick={signout}>
+                    SIGNOUT
+                  </Link>
+                  <Link to='/register'>
+                    <Button>ACCOUNT</Button>
+                  </Link>
+                </Nav>
+              ) : (
+                <Nav>
+                  <Link className='nav-link' to='/'>
+                    NEWS
+                  </Link>
+                  <Link className='nav-link' to='/'>
+                    ABOUT
+                  </Link>
+                  <Link className='nav-link' to='/'>
+                    SOLUTIONS
+                  </Link>
+                  <Link className='nav-link' to='/'>
+                    LEARNING & SUPPORT
+                  </Link>
+                  <Link className='nav-link' to='/'>
+                    COMMUNITY
+                  </Link>
+                  <Link className='nav-link' to='/'>
+                    SUBSCRIPTION
+                  </Link>
+                  <Link className='nav-link' to='/'>
+                    MARKETPLACE
+                  </Link>
+                  <Link className='nav-link' to='/login'>
+                    SIGN IN
+                  </Link>
+                  <Link to='/register'>
+                    <Button>GET STARTED</Button>
+                  </Link>
+                </Nav>
+              )}
             </Navbar.Collapse>
           </Navbar>
         </div>
