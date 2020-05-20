@@ -35,7 +35,7 @@ function Login ({ login, isLoading }) {
                 }}
               />
             </Col>
-            <Col sm={8}>
+            <Col sm={8} style={{ marginBottom: '50px' }}>
               <Row>
                 <Col lg={2} />
                 <Col lg={5}>
