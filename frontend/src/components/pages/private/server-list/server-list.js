@@ -57,12 +57,28 @@ function ServerCreate () {
                           padding: '5px 0'
                         }}
                       >
+                        DEVELOPER ACCESS
+                      </h5>
+                    </center>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col sm={12}>
+                    <center>
+                      <h5
+                        style={{
+                          color: 'lightgray',
+                          fontSize: '11px',
+                          margin: '0',
+                          marginTop: '10px',
+                          padding: '5px 0'
+                        }}
+                      >
                         MY LIBRARY
                       </h5>
                     </center>
                   </Col>
                 </Row>
-
                 {servers.map((server, i) => {
                   const {
                     account_id,

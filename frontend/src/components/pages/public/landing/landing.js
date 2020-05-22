@@ -1,5 +1,7 @@
 import React from 'react'
 import Background from '../../../../images/background.jpg'
+import BackgroundTwo from '../../../../images/background3.jpg'
+import BackgroundThree from '../../../../images/background4.jpg'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -23,7 +25,7 @@ function Landing () {
         <Row style={{ boxSizing: 'border-box' }}>
           <Col sm={6} style={{ padding: '30px' }}>
             <img
-              src={Background}
+              src={BackgroundTwo}
               style={{
                 width: '100%',
                 height: '350px',
@@ -56,7 +58,7 @@ function Landing () {
           </Col>
           <Col sm={6} style={{ padding: '30px' }}>
             <img
-              src={Background}
+              src={BackgroundThree}
               style={{
                 width: '100%',
                 height: '350px',

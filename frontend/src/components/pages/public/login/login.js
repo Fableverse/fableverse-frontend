@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 
-import Background from '../../../../images/background.jpg'
+import Background from '../../../../images/background2.jpg'
 
 function Login ({ login, isLoading }) {
   function handleLogin () {
@@ -133,36 +133,6 @@ function Login ({ login, isLoading }) {
             </Col>
           </Row>
         </Container>
-        // <center>
-        //   <h1>Login</h1>
-        //   <div>
-        //     <input
-        //       type='text'
-        //       id='email'
-        //       name='email'
-        // onKeyPress={event => {
-        //   if (event.key === 'Enter') {
-        //     handleLogin()
-        //   }
-        // }}
-        //       placeholder='Email...'
-        //     />
-        //     <br />
-        //     <input
-        //       type='password'
-        //       id='password'
-        //       name='password'
-        //       onKeyPress={event => {
-        //         if (event.key === 'Enter') {
-        //           handleLogin()
-        //         }
-        //       }}
-        //       placeholder='Password...'
-        //     />
-        //     <br />
-        //     <button onClick={handleLogin}>Login</button>
-        //   </div>
-        // </center>
       )}
     </div>
   )

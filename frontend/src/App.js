@@ -180,7 +180,7 @@ function App () {
                     COMMUNITY
                   </Link>
                   <Link className='nav-link' to='/subscription'>
-                    SUBSCRIPTION
+                    PRICING
                   </Link>
                   <Link className='nav-link' to='/marketplace'>
                     MARKETPLACE
