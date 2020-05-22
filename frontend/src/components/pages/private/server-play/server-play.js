@@ -315,7 +315,7 @@ function ServerPlay ({ setInGame }) {
                 Report a Bug
               </a>
               <a
-                href='/servers/'
+                href='/library'
                 style={{
                   width: '100%',
                   display: 'block',

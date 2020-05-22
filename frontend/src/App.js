@@ -9,10 +9,10 @@ import Logo from './images/logo.jpg'
 import Landing from './components/pages/public/landing/landing'
 import Login from './components/pages/public/login/login'
 import Register from './components/pages/public/register/register'
-import Motd from './components/pages/private/motd/motd'
 import ServerCreate from './components/pages/private/server-create/server-create'
-import ServerList from './components/pages/private/server-list/server-list'
+import ServerMarketplace from './components/pages/private/server-marketplace/server-marketplace'
 import ServerPlay from './components/pages/private/server-play/server-play'
+import ServerList from './components/pages/private/server-list/server-list'
 
 import Footer from './components/footer/footer'
 
@@ -143,43 +143,46 @@ function App () {
 
               {isAuthenticated ? (
                 <Nav>
-                  <Link className='nav-link' to='/'>
+                  <Link className='nav-link' to='/marketplace'>
                     MARKETPLACE
                   </Link>
-                  <Link className='nav-link' to='/'>
+                  <Link className='nav-link' to='/library'>
                     MY GAMES
                   </Link>
-                  <Link className='nav-link' to='/'>
+                  <Link className='nav-link' to='/game/create'>
                     CREATE A GAME
                   </Link>
                   <Link className='nav-link' onClick={signout}>
                     SIGNOUT
                   </Link>
-                  <Link to='/register'>
+                  <Link to='/'>
                     <Button>ACCOUNT</Button>
                   </Link>
                 </Nav>
               ) : (
                 <Nav>
-                  <Link className='nav-link' to='/'>
+                  <Link className='nav-link' to='/news'>
                     NEWS
                   </Link>
-                  <Link className='nav-link' to='/'>
+                  <Link className='nav-link' to='/about'>
                     ABOUT
                   </Link>
-                  <Link className='nav-link' to='/'>
+                  <Link className='nav-link' to='/solutions'>
                     SOLUTIONS
                   </Link>
-                  <Link className='nav-link' to='/'>
-                    LEARNING & SUPPORT
+                  <Link className='nav-link' to='/learning'>
+                    LEARNING
                   </Link>
-                  <Link className='nav-link' to='/'>
+                  <Link className='nav-link' to='/support'>
+                    SUPPORT
+                  </Link>
+                  <Link className='nav-link' to='/community'>
                     COMMUNITY
                   </Link>
-                  <Link className='nav-link' to='/'>
+                  <Link className='nav-link' to='/subscription'>
                     SUBSCRIPTION
                   </Link>
-                  <Link className='nav-link' to='/'>
+                  <Link className='nav-link' to='/marketplace'>
                     MARKETPLACE
                   </Link>
                   <Link className='nav-link' to='/login'>
@@ -193,44 +196,6 @@ function App () {
             </Navbar.Collapse>
           </Navbar>
         </div>
-
-        // <nav>
-        //   <ul>
-        //     <li>
-        //       <Link to='/'>Home</Link>
-        //     </li>
-        //     {isAuthenticated ? (
-        //       ''
-        //     ) : (
-        //       <div>
-        //         <li>
-        //           <Link to='/login'>Login</Link>
-        //         </li>
-        //         <li>
-        //           <Link to='/register'>Register</Link>
-        //         </li>
-        //       </div>
-        //     )}
-
-        //     {isAuthenticated ? (
-        //       <div>
-        //         <li>
-        //           <Link to='/servers/create'>Create Server</Link>
-        //         </li>
-        //         <li>
-        //           <Link to='/servers/'>Server List</Link>
-        //         </li>
-        //         <li>
-        //           <Link to='/login' onClick={signout}>
-        //             Signout
-        //           </Link>
-        //         </li>
-        //       </div>
-        //     ) : (
-        //       ''
-        //     )}
-        //   </ul>
-        // </nav>
       )}
 
       <Switch>
@@ -241,11 +206,11 @@ function App () {
           <Register register={register} />
         </Route>
 
-        <PrivateRoute path='/motd' component={Motd} />
-        <PrivateRoute path='/servers/create' component={ServerCreate} />
+        <PrivateRoute path='/game/create' component={ServerCreate} />
+        <PrivateRoute path='/library' component={ServerList} />
 
         <Route
-          path='/servers/:id'
+          path='/game/:id'
           render={props =>
             isAuthenticated === true ? (
               <ServerPlay setInGame={setInGame} />
@@ -254,11 +219,14 @@ function App () {
             )
           }
         />
-        <PrivateRoute path='/servers/' component={ServerList} />
+
+        <Route path='/marketplace'>
+          <ServerMarketplace />
+        </Route>
 
         {isAuthenticated ? (
           <Route path='/'>
-            <Motd />
+            <ServerList />
           </Route>
         ) : (
           <Route path='/'>

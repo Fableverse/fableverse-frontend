@@ -26,7 +26,7 @@ function ServerCharacter () {
       })
       .then(res => {
         console.log(res)
-        window.location.href = '/servers/' + id
+        window.location.href = '/game/' + id
       })
   }
 

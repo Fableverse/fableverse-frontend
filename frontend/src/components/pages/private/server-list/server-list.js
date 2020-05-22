@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import Image from '../../../../images/background.jpg'
+
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Form from 'react-bootstrap/Form'
+import Badge from 'react-bootstrap/Badge'
+import Button from 'react-bootstrap/Button'
 
 import Loading from '../../../loading/loading'
 
@@ -16,7 +24,6 @@ function ServerCreate () {
         console.log('Updated!')
         setServers(data.data)
         setIsLoading(false)
-        // setTimeout(refresh, 5000)
       })
     }
     refresh()
@@ -28,52 +35,81 @@ function ServerCreate () {
         <Loading />
       ) : (
         <div>
-          <center>
-            <h1 style={{ margin: 0, padding: 0 }}>Server List</h1>
-            <button
-              onClick={() => {
-                window.location.reload()
-              }}
-            >
-              Refresh
-            </button>
-          </center>
-          <table style={{ width: '100%' }}>
-            <tbody>
-              <tr style={{ textAlign: 'left' }}>
-                <th>Owner ID</th>
-                <th>Server ID</th>
-                <th>Server Name</th>
-                <th>Server Description</th>
-                <th>Server Status</th>
-                <th>Actions</th>
-              </tr>
+          <Container fluid>
+            <Row>
+              <Col
+                sm={3}
+                style={{
+                  height: '100vh',
+                  backgroundColor: '#141414',
+                  padding: '0px'
+                }}
+              >
+                <Row>
+                  <Col sm={12}>
+                    <center>
+                      <h5
+                        style={{
+                          color: 'lightgray',
+                          fontSize: '11px',
+                          margin: '0',
+                          marginTop: '10px',
+                          padding: '5px 0'
+                        }}
+                      >
+                        MY LIBRARY
+                      </h5>
+                    </center>
+                  </Col>
+                </Row>
 
-              {servers.map((server, i) => {
-                const {
-                  account_id,
-                  id,
-                  server_name,
-                  description,
-                  status
-                } = server
-                return (
-                  <tr key={i}>
-                    <td>{account_id}</td>
-                    <td>{id}</td>
-                    <td>{server_name}</td>
-                    <td>{description}</td>
-                    <td>{status}</td>
-                    <td>
-                      <Link to={'/servers/' + id}>
-                        <button>Join</button>
-                      </Link>
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
+                {servers.map((server, i) => {
+                  const {
+                    account_id,
+                    id,
+                    server_name,
+                    description,
+                    status
+                  } = server
+                  return (
+                    <Link to={'/game/' + id}>
+                      <Row
+                        className='library-game'
+                        style={{ width: '100%', margin: '0' }}
+                      >
+                        <Col lg={12}>
+                          <h5
+                            style={{
+                              color: 'lightgray',
+                              fontSize: '11px',
+                              margin: '0',
+                              width: '100%',
+                              padding: '5px'
+                            }}
+                          >
+                            <img
+                              src={Image}
+                              style={{
+                                width: '20px',
+                                height: '20px',
+                                borderRadius: '4px',
+                                marginRight: '5px'
+                              }}
+                            />
+                            {server_name}
+                            <span style={{ float: 'right', padding: '2px' }}>
+                              Players: 0
+                            </span>
+                          </h5>
+                        </Col>
+                      </Row>
+                    </Link>
+                  )
+                })}
+              </Col>
+              <Col sm={9}></Col>
+            </Row>
+          </Container>
         </div>
       )}
     </div>

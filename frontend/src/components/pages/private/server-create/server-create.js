@@ -17,7 +17,7 @@ function ServerCreate () {
       })
       .then(res => {
         console.log(res.status)
-        window.location.href = '/servers/'
+        window.location.href = '/library/'
       })
       .catch(function (error) {
         console.log(error)
