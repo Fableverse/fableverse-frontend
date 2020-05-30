@@ -1,0 +1,194 @@
+body {
+  margin: auto;
+  max-width: 1200px;
+  font-family: 'Raleway', sans-serif;
+  /* background-color: #191a1c;
+  color: white; */
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 1px;
+  grid-row-gap: 1px;
+  text-align: center;
+}
+
+.grid-item {
+  margin: 20px;
+  padding: 20px;
+  background-color: rgb(230, 239, 248);
+  border-radius: 10px;
+  box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-family: 'Indie Flower', cursive;
+  margin: 0;
+  padding: 0;
+  font-size: 64px;
+}
+
+h2 {
+  font-family: 'Indie Flower', cursive;
+}
+
+h3 {
+  font-family: 'Indie Flower', cursive;
+  margin: 0;
+  padding: 0;
+}
+
+h4 {
+  margin: 0;
+  padding: 0;
+}
+
+.beta {
+  width: 500px;
+  padding: 12px 20px;
+  margin: 8px 0px 7px 10px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 8px 0px 0px 8px;
+  box-sizing: border-box;
+  font-size: 24px;
+}
+
+.beta-button {
+  padding: 12px 20px;
+  margin: 8px 10px 8px 0px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  background-color: rgb(238, 238, 238);
+  border-radius: 0px 8px 8px 0;
+  box-sizing: border-box;
+  font-size: 24px;
+}
+
+.beta-text {
+  width: 500px;
+  padding: 5px;
+}
+
+.beta-button:hover {
+  background-color: rgb(218, 218, 218);
+  cursor: pointer;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.screenshot {
+  height: 500px;
+  margin-top: 30px;
+  border-radius: 10px;
+  box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.7);
+}
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #333; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .screenshot {
+    width: 90%;
+    height: auto;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .beta-text {
+    width: 350px;
+  }
+
+  .beta {
+    width: 65%;
+    font-size: 14px;
+  }
+
+  .beta-button {
+    width: 30%;
+    font-size: 14px;
+  }
+
+  .screenshot {
+    width: 90%;
+    height: auto;
+  }
+}
