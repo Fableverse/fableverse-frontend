@@ -1,0 +1,35 @@
+Defender
+	1. defense
+	2. magic_resistence
+	
+Attacked
+	3. physical_damage
+	4. magic_damage
+	5. armor_penetration
+	6. critical_chance
+	7. critical_power_percentage
+
+Stats
+	8. Strength
+	9. Intelligence
+	10. Wisdom
+	11. Dexterity
+	12. Constitution
+	13. Charisma
+
+Formula for Damage
+	( 8 * (3 - (1 - 5)) + 9 * (4 - 2) ) * 7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
